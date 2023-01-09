@@ -1,0 +1,16 @@
+package com.prospectaAssignment.model;
+
+import java.util.List;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Data {
+	
+	private Long entryID;
+	
+	private Integer count;
+	
+	private List<Data> entries;
+	
+}

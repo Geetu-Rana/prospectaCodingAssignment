@@ -1,0 +1,53 @@
+package com.prospectaAssignment.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
+
+import com.prospectaAssignment.model.Data;
+import com.prospectaAssignment.model.Entry;
+import com.prospectaAssignment.model.EntryDto;
+
+public class DataServiceImpl implements Service {
+
+	private RestTemplate template;
+	
+	private final String url = "https://api.publicapis.org/entries";
+	
+	@Autowired
+	public DataServiceImpl( RestTemplate temp ) {
+		// TODO Auto-generated constructor stub
+		
+		this.template = temp;
+	}
+	
+	@Override
+	public List<EntryDto> getDetailsOfCategoty( String category) {
+		
+		
+		Data data = template.getForObject(url, Data.class);
+		
+		List<EntryDto> list = new ArrayList<>();
+		
+		for(Entry e : data.getEntries()) {
+			
+			String[] cat = e.getCategory().split(" ");
+			
+			if(category.equalsIgnoreCase(cat[0])) {
+				list.add( new EntryDto(e.getApi(), e.getDescription()));
+			}
+		}
+		
+		
+		return list;
+	}
+
+	@Override
+	public String saveEntryToData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

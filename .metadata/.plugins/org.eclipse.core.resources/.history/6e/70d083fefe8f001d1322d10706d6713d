@@ -1,0 +1,13 @@
+package com.prospectaAssignment.Service;
+
+import java.util.List;
+
+import com.prospectaAssignment.model.EntryDto;
+
+public interface ServiceImpl {
+	
+	public List<EntryDto> getDetailsOfCategoty();
+	
+	public String saveEntryToData();
+	
+}
